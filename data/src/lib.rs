@@ -1,4 +1,6 @@
+mod database;
 mod routes;
+
 use sea_orm::Database;
 
 pub async fn run(database_uri: &str) {
