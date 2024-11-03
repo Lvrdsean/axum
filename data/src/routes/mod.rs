@@ -20,7 +20,7 @@ use get_tasks::{get_all_tasks, get_one_task};
 use partial_update_task::partial_update;
 use sea_orm::DatabaseConnection;
 use update_tasks::atomic_update;
-use users::create_user;
+use users::{create_user, login};
 use validate_with_serde::validate_with_serde;
 
 pub async fn create_routes(database: DatabaseConnection) -> Router<Body> {
@@ -35,5 +35,6 @@ pub async fn create_routes(database: DatabaseConnection) -> Router<Body> {
         .route("/tasks/:task_id", patch(partial_update))
         .route("/tasks/:task_id", delete(delete_task))
         .route("/users", post(create_user))
+        .route("/users/login", post(login))
         .layer(Extension(database))
 }
